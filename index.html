@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Máquina de Turing - Palíndromos Binarios</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Máquina de Turing - Palíndromos Binarios</h1>
+    
+        <div class="info-box">
+          <h3>¿Qué es un palíndromo?</h3>
+          <p>Un palíndromo es una secuencia que se lee igual de izquierda a derecha que de derecha a izquierda. Por ejemplo:</p>
+          <ul>
+            <li>101 es un palíndromo binario.</li>
+            <li>1001 también es un palíndromo binario.</li>
+            <li>110 no es un palíndromo binario.</li>
+          </ul>
+    
+          <h3>¿Qué son los números binarios?</h3>
+          <p>Los números binarios están formados únicamente por los dígitos <strong>0</strong> y <strong>1</strong>. Son la base del sistema numérico usado en informática.</p>
+    
+          <h3>¿Cómo funciona esta máquina de Turing?</h3>
+          <p>La máquina de Turing sigue estos pasos:</p>
+          <ol>
+            <li>Comprueba si el primer y el último dígito son iguales.</li>
+            <li>Si son iguales, los marca como visitados y avanza hacia el centro de la cinta.</li>
+            <li>Si encuentra un desajuste, rechaza la cadena.</li>
+            <li>Si todos los dígitos coinciden, acepta la cadena como un palíndromo.</li>
+          </ol>
+        </div>
+    
+        <label for="inputString">Ingrese una cadena binaria:</label>
+        <input type="text" id="inputString" maxlength="20" />
+        <button onclick="startTuring()">Iniciar</button>
+    
+        <div id="tapeContainer">
+          <div class="tape" id="tape"></div>
+          <div class="tape" id="pointer"></div>
+        </div>
+    
+        <p id="result"></p>
+        <p id="stepMessage" style="font-weight: bold;"></p>
+      </div>
+
+  <script>
+    let tape = [];
+    let head = 0;
+    let state = "q0";
+
+    function drawTape() {
+      const tapeDiv = document.getElementById('tape');
+      const pointerDiv = document.getElementById('pointer');
+      tapeDiv.innerHTML = "";
+      pointerDiv.innerHTML = "";
+      tape.forEach((symbol, index) => {
+        const cell = document.createElement('div');
+        cell.className = 'cell';
+        cell.textContent = symbol;
+        tapeDiv.appendChild(cell);
+
+        const pointer = document.createElement('div');
+        pointer.className = 'cell';
+        pointer.textContent = index === head ? "↑" : "";
+        pointerDiv.appendChild(pointer);
+      });
+    }
+
+    function transition() {
+      const tail = tape.length - head - 1; // Calcula la posición del extremo opuesto
+      if (state === "q0") {
+        if (tape[head] === "0" || tape[head] === "1") {
+          if (tape[head] === tape[tail]) {
+            tape[head] = "X"; // Marca el primer símbolo
+            tape[tail] = "X"; // Marca el símbolo opuesto
+            head++; // Avanza hacia el centro
+          } else {
+            state = "reject"; // No coinciden
+          }
+        } else {
+          state = "accept"; // Todos los símbolos han sido procesados
+        }
+      }
+    }
+
+    function startTuring() {
+      const inputString = document.getElementById("inputString").value.trim();
+      if (!/^[01]*$/.test(inputString)) {
+        document.getElementById("result").textContent = "Por favor, ingrese solo una cadena binaria (compuesta por 0s y 1s).";
+        return;
+      }
+      
+      tape = ["_", ...inputString.split(""), "_"];
+      head = 1; // Comenzar desde el primer símbolo
+      state = "q0";
+      document.getElementById("result").textContent = "";
+
+      drawTape();
+
+      const interval = setInterval(() => {
+        if (state === "accept" || state === "reject") {
+          clearInterval(interval);
+          document.getElementById("result").textContent =
+            state === "accept" ? "¡La cadena es un palíndromo!" : "La cadena no es un palíndromo.";
+        } else {
+          transition();
+          drawTape();
+        }
+      }, 1000);
+    }
+  </script>
+</body>
+</html>

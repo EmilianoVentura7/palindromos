@@ -1,0 +1,129 @@
+/* General */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f6f9;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Títulos */
+  h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+  
+  h3 {
+    color: #34495e;
+    margin-top: 20px;
+  }
+  
+  /* Información */
+  .info-box {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    margin-bottom: 30px;
+  }
+  
+  .info-box ul {
+    margin: 0;
+    padding: 0 20px;
+    list-style-type: square;
+  }
+  
+  .info-box ol {
+    margin: 10px 0;
+    padding-left: 20px;
+  }
+  
+  /* Botones y entradas */
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  button {
+    display: inline-block;
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  button:hover {
+    background: #2980b9;
+  }
+  
+  /* Cinta */
+  .tape {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .cell {
+    border: 2px solid #ddd;
+    padding: 15px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 4px;
+    background-color: #ecf0f1;
+    margin: 0 2px;
+  }
+  
+  .pointer .cell {
+    color: #e74c3c;
+    font-weight: bold;
+  }
+  
+  /* Mensajes */
+  #result {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+  
+  #stepMessage {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 16px;
+    color: #555;
+  }
+  
+  /* Footer */
+  footer {
+    text-align: center;
+    margin-top: 50px;
+    color: #7f8c8d;
+  }  
